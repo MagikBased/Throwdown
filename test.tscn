@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcbmkbuq0m7nv"]
+
+[ext_resource type="PackedScene" uid="uid://3onpbehpft0y" path="res://_Objects/landing_space.tscn" id="1_xttyd"]
+[ext_resource type="Script" path="res://PlayerScript.gd" id="2_c3x5v"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2uphb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jjujl"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="LandingSpace" parent="." node_paths=PackedStringArray("nextSpace") instance=ExtResource("1_xttyd")]
+nextSpace = NodePath("../LandingSpace2")
+spaceType = null
+
+[node name="LandingSpace2" parent="." node_paths=PackedStringArray("nextSpace") instance=ExtResource("1_xttyd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.75896)
+nextSpace = NodePath("../LandingSpace3")
+spaceType = null
+
+[node name="LandingSpace3" parent="." node_paths=PackedStringArray("nextSpace") instance=ExtResource("1_xttyd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7436, 0.00709462, -3.74933)
+nextSpace = NodePath("../LandingSpace4")
+spaceType = null
+
+[node name="LandingSpace4" parent="." node_paths=PackedStringArray("nextSpace") instance=ExtResource("1_xttyd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.75598, 0, 0.036911)
+nextSpace = NodePath("../LandingSpace")
+spaceType = null
+
+[node name="Player" type="CharacterBody3D" parent="."]
+script = ExtResource("2_c3x5v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(0.350636, 0, 0, 0, 0.342502, 0, 0, 0, 0.350636, 0, 0.359203, 0)
+mesh = SubResource("CapsuleMesh_2uphb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.231537, 0)
+shape = SubResource("CapsuleShape3D_jjujl")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.954537, 0.298091, 0, -0.298091, 0.954537, 0.478789, 3.28807, 5.27338)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Camera3D"]
